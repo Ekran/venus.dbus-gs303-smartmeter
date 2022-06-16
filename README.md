@@ -24,7 +24,7 @@ When you think that the script crashes, start it directly from the command line:
 and see if it throws any error messages.
 
 If the script stops with the message
-`dbus.exceptions.NameExistsException: Bus name already exists: com.victronenergy.grid"`
+`dbus.exceptions.NameExistsException: Bus name already exists: com.victronenergy.grid`
 it means that the service is still running or another service is using that bus name.
 
 #### Restart the script
