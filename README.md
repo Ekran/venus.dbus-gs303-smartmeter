@@ -8,12 +8,12 @@ The Python script cyclically reads data from the Fronius SmartMeter via the Fron
 
 ### Configuration
 
-In the config.ini file, you should put the IP of your Fronius device that hosts the REST API. In my setup, it is the IP of the Fronius Symo, which gets the data from the Fronius Smart Metervia the RS485 connection between them.
+In the `config.ini` file, you should put the IP of your Fronius device that hosts the REST API. In my setup, it is the IP of the Fronius Symo, which gets the data from the Fronius Smart Metervia the RS485 connection between them.
 
 ### Installation
 
-1. Create a subfolder under /data named dbus-fronius-smartmeter on your venus.
-2. Copy all files and the service folder to the /data/dbus-fronius-smartmeter folder.
+1. Create a subfolder under `/data` named `dbus-fronius-smartmeter` on your venus.
+2. Copy all files and the service folder to the `/data/dbus-fronius-smartmeter` folder.
 3. Set permissions for the install.sh file: `chmod a+x /data/dbus-fronius-smartmeter/install.sh`
 4. The daemon-tools should automatically start this service within seconds.
 
