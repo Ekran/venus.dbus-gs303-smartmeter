@@ -40,7 +40,7 @@ The daemon-tools will restart the script within a few seconds.
 In my installation at home, I am using the following Hardware:
 - Fronius Symo 17.5 - PV Grid Tied Inverter (three phases)
 - Fronius Smart Meter 63A-3 - (three phases)
-- 3 Victron MultiPlus-II - Battery Inverter (three phase)
+- 3 Victron MultiPlus-II - Battery Inverter (three phases)
 - Victron Cerbo GX running Venus OS
 - LiFePO Battery (16x EVE 280Ah)
 - 123\SmartBMS
