@@ -20,17 +20,19 @@ In the config.ini file, you should put the IP of your Fronius device that hosts 
 ### Debugging
 
 When you think that the script crashes, start it directly from the command line:
+
 `python /data/dbus-fronius-smartmeter/dbus-fronius-smartmeter.py`
+
 and see if it throws any error messages.
 
-If the script stops with the message
-`dbus.exceptions.NameExistsException: Bus name already exists: com.victronenergy.grid`
-it means that the service is still running or another service is using that bus name.
+If the script stops with the message `dbus.exceptions.NameExistsException: Bus name already exists: com.victronenergy.grid` it means that the service is still running or another service is using that bus name.
 
 #### Restart the script
 
 If you want to restart the script, for example after changing it, just run the following command:
+
 `/data/dbus-fronius-smartmeter/restart.sh`
+
 The daemon-tools will restart the script within a few seconds.
 
 ### Hardware
