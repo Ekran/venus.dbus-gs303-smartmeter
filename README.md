@@ -21,7 +21,7 @@ In the `config.ini` file, you should put the IP of your Tasmota device that read
 
 When you think that the script crashes, start it directly from the command line:
 
-`python /data/dbus-gs303-smartmeter/dbus-fronius-smartmeter.py`
+`python /data/dbus-gs303-smartmeter/dbus-gs303-smartmeter.py`
 
 and see if it throws any error messages.
 
