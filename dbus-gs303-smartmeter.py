@@ -52,7 +52,9 @@ class DbusGS303SmartmeterService:
 
   def _update(self):
     try:
-      meter_url         = "http://%s/cm?cmnd=status%208" % (self._getConfig()['DEFAULT']['Host'])
+      logging.debug("meter_ip: {}".format(self._getConfig()['DEFAULT']['Host']))
+      meter_url         = "http://%s/cm?cmnd=status%%208" % (self._getConfig()['DEFAULT']['Host'])
+      logging.debug("meter_url: {}".format(meter_url))
       meter_r           = requests.get(url=meter_url) # request data from the Fronius PV inverter
       meter_data        = meter_r.json() # convert JSON data
 
@@ -62,31 +64,31 @@ class DbusGS303SmartmeterService:
       energy_delivered = float(meter_data['StatusSNS']['GS303']['Total_out'])
 
       # set values because they are not available :-( hopefully they are not necessary - if, they should be calculated)
-      meter_data['Body']['Data']['Voltage_AC_Phase_1']  = 0
-      meter_data['Body']['Data']['Voltage_AC_Phase_2']  = 0
-      meter_data['Body']['Data']['Voltage_AC_Phase_3']  = 0
-      meter_data['Body']['Data']['Current_AC_Phase_1']  = 0
-      meter_data['Body']['Data']['Current_AC_Phase_2']  = 0
-      meter_data['Body']['Data']['Current_AC_Phase_3']  = 0
-      meter_data['Body']['Data']['PowerReal_P_Phase_1'] = 0
-      meter_data['Body']['Data']['PowerReal_P_Phase_2'] = 0
-      meter_data['Body']['Data']['PowerReal_P_Phase_3'] = 0
+      #meter_data['Body']['Data']['Voltage_AC_Phase_1']  = 0
+      #meter_data['Body']['Data']['Voltage_AC_Phase_2']  = 0
+      #meter_data['Body']['Data']['Voltage_AC_Phase_3']  = 0
+      #meter_data['Body']['Data']['Current_AC_Phase_1']  = 0
+      #meter_data['Body']['Data']['Current_AC_Phase_2']  = 0
+      #meter_data['Body']['Data']['Current_AC_Phase_3']  = 0
+      #meter_data['Body']['Data']['PowerReal_P_Phase_1'] = 0
+      #meter_data['Body']['Data']['PowerReal_P_Phase_2'] = 0
+      #meter_data['Body']['Data']['PowerReal_P_Phase_3'] = 0
 
-      meter_data['Body']['Data']['EnergyReal_WAC_Sum_Consumed'] = energy_consumed
-      meter_data['Body']['Data']['EnergyReal_WAC_Sum_Produced'] = energy_delivered
+      #meter_data['Body']['Data']['EnergyReal_WAC_Sum_Consumed'] = energy_consumed
+      #meter_data['Body']['Data']['EnergyReal_WAC_Sum_Produced'] = energy_delivered
 
       self._dbusservice['/Ac/Power']          = meter_consumption # positive: consumption, negative: feed into grid
-      self._dbusservice['/Ac/L1/Voltage']     = meter_data['Body']['Data']['Voltage_AC_Phase_1']
-      self._dbusservice['/Ac/L2/Voltage']     = meter_data['Body']['Data']['Voltage_AC_Phase_2']
-      self._dbusservice['/Ac/L3/Voltage']     = meter_data['Body']['Data']['Voltage_AC_Phase_3']
-      self._dbusservice['/Ac/L1/Current']     = meter_data['Body']['Data']['Current_AC_Phase_1']
-      self._dbusservice['/Ac/L2/Current']     = meter_data['Body']['Data']['Current_AC_Phase_2']
-      self._dbusservice['/Ac/L3/Current']     = meter_data['Body']['Data']['Current_AC_Phase_3']
-      self._dbusservice['/Ac/L1/Power']       = meter_data['Body']['Data']['PowerReal_P_Phase_1']
-      self._dbusservice['/Ac/L2/Power']       = meter_data['Body']['Data']['PowerReal_P_Phase_2']
-      self._dbusservice['/Ac/L3/Power']       = meter_data['Body']['Data']['PowerReal_P_Phase_3']
-      self._dbusservice['/Ac/Energy/Forward'] = float(meter_data['Body']['Data']['EnergyReal_WAC_Sum_Consumed']) # energy bought from the grid
-      self._dbusservice['/Ac/Energy/Reverse'] = float(meter_data['Body']['Data']['EnergyReal_WAC_Sum_Produced']) # energy sold to the grid
+      self._dbusservice['/Ac/L1/Voltage']     = 0 # meter_data['Body']['Data']['Voltage_AC_Phase_1']
+      self._dbusservice['/Ac/L2/Voltage']     = 0 # meter_data['Body']['Data']['Voltage_AC_Phase_2']
+      self._dbusservice['/Ac/L3/Voltage']     = 0 # meter_data['Body']['Data']['Voltage_AC_Phase_3']
+      self._dbusservice['/Ac/L1/Current']     = 0 # meter_data['Body']['Data']['Current_AC_Phase_1']
+      self._dbusservice['/Ac/L2/Current']     = 0 # meter_data['Body']['Data']['Current_AC_Phase_2']
+      self._dbusservice['/Ac/L3/Current']     = 0 # meter_data['Body']['Data']['Current_AC_Phase_3']
+      self._dbusservice['/Ac/L1/Power']       = 0 # meter_data['Body']['Data']['PowerReal_P_Phase_1']
+      self._dbusservice['/Ac/L2/Power']       = 0 # meter_data['Body']['Data']['PowerReal_P_Phase_2']
+      self._dbusservice['/Ac/L3/Power']       = 0 # meter_data['Body']['Data']['PowerReal_P_Phase_3']
+      self._dbusservice['/Ac/Energy/Forward'] = energy_consumed # float(meter_data['Body']['Data']['EnergyReal_WAC_Sum_Consumed']) # energy bought from the grid
+      self._dbusservice['/Ac/Energy/Reverse'] = energy_delivered # float(meter_data['Body']['Data']['EnergyReal_WAC_Sum_Produced']) # energy sold to the grid
 
       logging.debug("Consumption: {:.0f}W".format(meter_consumption))
 
@@ -153,3 +155,4 @@ def main():
   mainloop.run()
 
 if __name__ == "__main__": main()
+
