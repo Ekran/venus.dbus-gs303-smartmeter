@@ -17,8 +17,8 @@ sys.path.insert(1, os.path.join(os.path.dirname(__file__), '/opt/victronenergy/d
 from vedbus import VeDbusService
 
 
-class DbusFroniusSmartmeterService:
-  def __init__(self, servicename, paths, productname='Fronius Smart Meter', connection='Fronius Smart Meter service'):
+class DbusGS303SmartmeterService:
+  def __init__(self, servicename, paths, productname='GS303 Smart Meter', connection='GS303 Smart Meter service'):
 
     self._dbusservice = VeDbusService(servicename)
     self._paths = paths
