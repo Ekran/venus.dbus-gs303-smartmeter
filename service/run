@@ -1,3 +1,2 @@
 #!/bin/sh
-python /data/dbus-fronius-smartmeter/dbus-fronius-smartmeter.py
-
+python /data/dbus-gs303-smartmeter/dbus-gs303-smartmeter.py
