@@ -129,7 +129,7 @@ def main():
   _v   = lambda p, v: "{:.1f}V".format(v)
  
   pvac_output = DbusGS303SmartmeterService(
-    servicename='com.victronenergy.grid',
+    servicename='com.victronenergy.grid.gs303',
     paths={
       '/Ac/Power':             {'initial': 0, 'textformat': _w},
 
